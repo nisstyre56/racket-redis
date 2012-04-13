@@ -160,6 +160,36 @@
   (send-command "GETSET" key value)
   (read-reply))
 
+;; Hash commands
+
+(define (hset key field value)
+  (send-command "HSET" key field value)
+  (read-reply))
+
+(define (hget key field)
+  (send-command "HGET" key field)
+  (read-reply))
+
+(define (hgetall key)
+  (send-command "HGETALL" key)
+  (read-reply))
+
+(define (hincrby key field num)
+  (send-command "HINCRBY" key field num)
+  (read-reply))
+
+(define (hincrbyfloat key field num)
+  (send-command "HINCRBYFLOAT" key field num)
+  (read-reply))
+
+(define (hkeys key)
+  (send-command "HKEYS" key)
+  (read-reply))
+
+(define (hvals key)
+  (send-command "HVALS" key)
+  (read-reply))
+
 (define mget
   (lambda keys
     (apply send-command `("MGET" ,@keys)
