@@ -160,6 +160,11 @@
   (send-command "GETSET" key value)
   (read-reply))
 
+(define mget
+  (lambda keys
+    (apply send-command `("MGET" ,@keys)
+    (read-reply))))
+
 ;; Hash commands
 
 (define (hset key field value)
@@ -189,8 +194,3 @@
 (define (hvals key)
   (send-command "HVALS" key)
   (read-reply))
-
-(define mget
-  (lambda keys
-    (apply send-command `("MGET" ,@keys)
-    (read-reply))))
